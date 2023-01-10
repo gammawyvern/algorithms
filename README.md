@@ -1,5 +1,4 @@
 # Algorithms
-Algorithms
 A collection of short projects I've made to help learn various Algorithms.
 Most projects use Python to allow for easy reading and understanding of the concepts of the Data Structure for any reader.
 (The focus is the algorithms, not the programming language). 
