@@ -1,30 +1,29 @@
-import numpy as np;
 import sys;
 
 ########################################
 # Encrypt / Decrypt functions
 ########################################
 
-def encrypt(plain_text, key):
-    cipher_text = ""; 
+def transform_text(text, key, op):
+    transformed_text = ""; 
 
-    for index, letter in enumerate(plain_text):
+    for index, letter in enumerate(text):
+        if not letter.isalpha():
+            continue;
+
         x = ord(letter) - ord('a');
         y = ord(key[index % len(key)]) - ord('a');
-        cipher_text += chr(((x + y) % 26) + ord('a'));
+        transformed_text += chr((op(x, y) % 26) + ord('a'));
 
-    return cipher_text;
+    return transformed_text;
+
+def encrypt_op(x, y):
+    return x + y;
+
+def decrypt_op(x, y):
+    return x - y;
 
 
-def decrypt(cipher_text, key):
-    plain_text = ""; 
-
-    for index, letter in enumerate(cipher_text):
-        x = ord(letter) - ord('a');
-        y = ord(key[index % len(key)]) - ord('a');
-        plain_text += chr(((x - y) % 26) + ord('a'));
-
-    return plain_text;
 
 ########################################
 # Checking inputs and running
@@ -35,13 +34,20 @@ if len(sys.argv) != 4:
     sys.exit();
 
 op = sys.argv[1].lower();
-text = sys.argv[2].lower();
+text = sys.argv[2].lower().replace(" ", "");
 key = sys.argv[3].lower();
 
+if not text.isalpha():
+    print("Text must only contain alphabetic characters and spaces");
+    sys.exit();
+if not key.isalpha():
+    print("Key must only contain alphabetic characters");
+    sys.exit();
+
 if op == "encrypt" or op == "e":
-    print(encrypt(text, key));
+    print(transform_text(text, key, encrypt_op));
 elif op == "decrypt" or op == "d":
-    print(decrypt(text, key));
+    print(transform_text(text, key, decrypt_op));
 else:
     print("\nInvalid operation. Use [encrypt | e] or [decrypt | d]\n")
 
