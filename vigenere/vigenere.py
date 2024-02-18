@@ -28,26 +28,26 @@ def decrypt_op(x, y):
 ########################################
 # Checking inputs and running
 ########################################
+if __name__ == "__main__":
+    if len(sys.argv) != 4:
+        print("Usage: python script.py [option] [text] [key]");
+        sys.exit();
 
-if len(sys.argv) != 4:
-    print("Usage: python script.py [option] [text] [key]");
-    sys.exit();
+    op = sys.argv[1].lower();
+    text = sys.argv[2].lower().replace(" ", "");
+    key = sys.argv[3].lower();
 
-op = sys.argv[1].lower();
-text = sys.argv[2].lower().replace(" ", "");
-key = sys.argv[3].lower();
+    if not text.isalpha():
+        print("Text must only contain alphabetic characters and spaces");
+        sys.exit();
+    if not key.isalpha():
+        print("Key must only contain alphabetic characters");
+        sys.exit();
 
-if not text.isalpha():
-    print("Text must only contain alphabetic characters and spaces");
-    sys.exit();
-if not key.isalpha():
-    print("Key must only contain alphabetic characters");
-    sys.exit();
-
-if op == "encrypt" or op == "e":
-    print(transform_text(text, key, encrypt_op));
-elif op == "decrypt" or op == "d":
-    print(transform_text(text, key, decrypt_op));
-else:
-    print("\nInvalid operation. Use [encrypt | e] or [decrypt | d]\n")
+    if op == "encrypt" or op == "e":
+        print(transform_text(text, key, encrypt_op));
+    elif op == "decrypt" or op == "d":
+        print(transform_text(text, key, decrypt_op));
+    else:
+        print("\nInvalid operation. Use [encrypt | e] or [decrypt | d]\n")
 
