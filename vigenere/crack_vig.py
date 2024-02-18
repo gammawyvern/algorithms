@@ -1,5 +1,5 @@
 import sys;
-from vigenere import transform_text, encrypt_op, decrypt_op;
+from vigenere import transform_text, decrypt_op;
 
 cipher_text = "\
 JUGZSLYIGZNZZNMYELBYMYEKVABETTTLHLDBESBXHMZTL\
